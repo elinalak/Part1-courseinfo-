@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.css";
 
 const Header = ({ name }) => <h2>{name}</h2>;
 
@@ -18,16 +19,20 @@ const Button = ({ clickGood, clickNeutral, clickBad }) => {
 
 const StatisticLine = ({ value, text, measurament }) => {
   return (
-    <p>
-      {text} {value} {measurament}
-    </p>
+    <div className="row ">
+      <p className="col-sm-1">{text}</p> <p className="col-sm-1">{value}</p>
+      <p className="col-sm-1">{measurament}</p>
+    </div>
   );
 };
 
 const Statistics = ({ good, bad, neutral }) => {
   const all = good + bad + neutral;
-  const average = (good * 1 + bad * -1 + neutral * 0) / (good + bad + neutral);
-  const positive = (good / (good + bad + neutral)) * 100;
+  const average = (
+    (good * 1 + bad * -1 + neutral * 0) /
+    (good + bad + neutral)
+  ).toFixed(1);
+  const positive = ((good / (good + bad + neutral)) * 100).toFixed(1);
   return (
     <>
       <StatisticLine text="good" value={good} />
